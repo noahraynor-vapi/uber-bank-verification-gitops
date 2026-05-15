@@ -1,0 +1,11 @@
+function:
+  name: dtmf_keypad_tool
+  description: use the dtmf_keypad_tool tool to press numbers on the keypad
+  parameters:
+    properties: {}
+    required: []
+    type: object
+messages:
+  - blocking: false
+    type: request-start
+type: dtmf

@@ -1,0 +1,9 @@
+async: false
+beepDetectionEnabled: false
+function:
+  name: end_call_on_voicemail
+  description: End the call when you detect you've reached a voicemail system. Use this when you hear voicemail indicators
+messages:
+  - content: ""
+    type: request-start
+type: voicemail

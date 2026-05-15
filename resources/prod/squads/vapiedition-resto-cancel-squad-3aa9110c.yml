@@ -1,0 +1,52 @@
+name: "[VapiEdition] Resto Cancel Squad"
+members:
+  - assistantId: vapiedition-vm-detection-107ec29f
+    assistantOverrides:
+      metadata:
+        position:
+          x: 250
+          y: 100
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: vapiedition-resto-cancel-agent-8f81e716
+              assistantName: "[VapiEdition] Resto Cancel Agent"
+              description: Transfer to restaurant cancel agent when human detected
+              type: assistant
+          function:
+            name: handoff_to_cancel_agent
+          messages: []
+          type: handoff
+        - async: false
+          destinations:
+            - assistantId: vapiedition-ivr-navigator-ebca9d5c
+              assistantName: "[VapiEdition] IVR Navigator"
+              description: Transfer to IVR navigator when automated menu detected
+              type: assistant
+          function:
+            name: handoff_to_ivr_navigator
+          messages: []
+          type: handoff
+  - assistantId: vapiedition-ivr-navigator-ebca9d5c
+    assistantOverrides:
+      metadata:
+        position:
+          x: 500
+          y: 100
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: vapiedition-resto-cancel-agent-8f81e716
+              assistantName: "[VapiEdition] Resto Cancel Agent"
+              description: Transfer to cancel agent when human is reached through IVR
+              type: assistant
+          function:
+            name: handoff_to_cancel_agent
+          messages: []
+          type: handoff
+  - assistantId: vapiedition-resto-cancel-agent-8f81e716
+    assistantOverrides:
+      metadata:
+        position:
+          x: 750
+          y: 100

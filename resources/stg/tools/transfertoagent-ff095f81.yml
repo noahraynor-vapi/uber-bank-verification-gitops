@@ -1,0 +1,17 @@
+destinations:
+  - callerId: "{{customer.number}}"
+    number: "+18137260939"
+    numberE164CheckEnabled: true
+    transferPlan:
+      message: Hello, this customer is interested in additional Medicare benefits. Please take it from here.
+      mode: warm-transfer-say-message
+      sipVerb: refer
+    type: number
+function:
+  name: TransferToAgent
+  description: transfers the call to a live agent
+messages:
+  - blocking: true
+    content: Please hold on while I connect you to a live agent, one moment please.
+    type: request-start
+type: transferCall

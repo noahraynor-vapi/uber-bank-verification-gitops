@@ -1,0 +1,11 @@
+name: Call Summary
+assistant_ids: []
+description: Generates a structured summary of the call to replace built-in summaryPlan
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: "Provide a concise 2-4 sentence summary of the call. Include: the reason for the call, key information exchanged, the outcome or result, and any next steps or follow-up actions. Be factual and do not embellish or infer beyond what is in the transcript."
+  type: string
+target: messages
+type: ai

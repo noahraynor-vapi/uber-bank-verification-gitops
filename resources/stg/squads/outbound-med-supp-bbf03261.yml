@@ -1,0 +1,32 @@
+name: Outbound Med Supp
+members:
+  - assistantId: vm-detection-907af3cf
+    assistantOverrides:
+      metadata:
+        position:
+          x: 252.6022142759972
+          y: 101.12386836915624
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: outbound-call-fronter-med-supp-c3d45738
+              assistantName: Outbound Call Fronter Med Supp
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_assistant
+          messages:
+            - blocking: false
+              content: Hello, this is Sarah calling from the Medicare Enrollment Center on a recorded line. Am I speaking with {{customer.name}}?
+              type: request-start
+          type: handoff
+      voice:
+        model: eleven_flash_v2
+        provider: 11labs
+        voiceId: X03mvPuTfprif8QBAVeJ
+  - assistantId: outbound-call-fronter-med-supp-c3d45738
+    assistantOverrides:
+      metadata:
+        position:
+          x: 672.9351657791045
+          y: 264.37054933727194

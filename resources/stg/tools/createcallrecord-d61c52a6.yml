@@ -1,0 +1,22 @@
+async: true
+function:
+  name: CreateCallRecord
+  description: creates a call record in external database at the start of each call
+  parameters:
+    properties:
+      phone:
+        default: ""
+        description: the clients phone number
+        enum:
+          - "{{customer.number}}"
+        type: string
+    required: []
+    type: object
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+server:
+  headers: {}
+  url: https://prod-98.westus.logic.azure.com:443/workflows/cb9646191934415fbb5cdc0b7639023d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DXTX8nAvN-SBQmTB6lsrOgIwuGtsR_2lNfIEydFHa1o
+type: function

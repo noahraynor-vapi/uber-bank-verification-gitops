@@ -1,0 +1,57 @@
+name: Disposition
+assistant_ids:
+  - 1fa1ca17-4525-478b-822f-3654ca23ed2f
+  - f804e82c-7483-4f32-820d-232dd3742db1
+  - e953bbfa-bb52-4c6c-a216-fd533990c016
+  - b12f69c3-e22d-4ea1-86b6-8fc52f506932
+  - f0cb79f0-a58b-49d5-bd60-a2701e83e33b
+  - 6c1c9665-233a-47c8-bd7d-e827ac5689fd
+  - 5251a139-bf1f-401d-bb2a-9df1f73ce035
+  - c3d45738-e44b-4aea-9807-d2db6c799915
+  - 2f03221e-92c6-45a9-ae65-98dca5fede21
+  - 2cd8f094-55c6-409d-82c3-0b18db8281e9
+description: The disposition of the call
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: |-
+    Pick from one the following to determine the most accurate disposition of the call based on the transcript:
+    Call Transferred - When the call endedReason is assistant-forwarded-call
+    No Medicare ACA - When we reach a human that is not eligible for medicare, but is eligible for ACA (under 65 and does not have medicare yet)
+    No Medicare - When we reach a human that does not have medicare and will not have it within the next 3 months
+    Ineligible - They don't meet any of the above qualification criteria
+    Not Interested - When we reach a human, and they do not express interest
+    Not Available - When we reach a human, and they say they are not available to talk now or the desired person isn't reachable, and we DON'T reschedule the call
+    Scheduled Appointment - we reach a human, and they say they are not available to talk now or the desired person isn't reachable, but we DO reschedule the call
+    Language Barrier - When we reach a human, and they speak any language outside of English or Spanish
+    Robo Call - When we reach another automated assistant (but NOT voicemail)
+    AI Call Screener -  Treat AI call screening / call filtering as Robo Call (NOT Answering Machine). High-confidence transcript indicators include phrases like:
+        - "call screening"
+        - "please state your name" AND ("reason" OR "purpose") AND "calling"
+        - "screening service" AND ("say your name" OR "state your name") AND ("why you're calling" OR "reason for calling")
+        - "you will get a copy of this conversation" / "they will get a copy of this conversation" / "copy of your response"
+      - Guardrail: if the transcript includes voicemail markers like "leave a message" / "after the beep" / "voicemail" / "mailbox", that should NOT be Robo Call; it should be Answering Machine.
+
+    Answering Machine - When the call endedReason is voicemail
+    Dead Call - When the call endedReason is silence-timedout
+    Caller Hungup - When call endedReason is customer-ended-call or the caller does not engage with the assistant
+    Other - When none of the above categorizations match
+  enum:
+    - Call Transferred
+    - No Medicare ACA
+    - No Medicare
+    - Ineligible
+    - Not Interested
+    - Not Available
+    - Language Barrier
+    - Robo Call
+    - Other
+    - Scheduled Appointment
+    - Answering Machine
+    - Dead Call
+    - Caller Hungup
+    - AI Call Screener
+  type: string
+target: messages
+type: ai

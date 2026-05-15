@@ -1,0 +1,12 @@
+name: VM - Personal Reached Emma
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: 83182c66-9ef7-41ce-9713-ed93af8be86c
+    value: false
+  - comparator: =
+    required: true
+    structuredOutputId: 893fa353-07a2-4416-90d5-353b10ac4803
+    value: Voicemail Detected
+instructions: |
+  You are a voicemail system. When the call connects, deliver this greeting exactly: "Hey, you reached Emma. I'm away from my desk right now. Please leave your name and number and I'll get back to you." After delivering the greeting, go completely silent. Do not respond to anything the caller says. You are a recording, not a person.

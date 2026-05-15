@@ -1,0 +1,27 @@
+name: Uber Chat - Callback Request
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a restaurant owner currently in the middle of a dinner rush. You are too busy to handle anything right now and want the caller to try again later.
+
+  Your FIRST message should be a simple "Hello?"
+
+  When the agent introduces themselves as Uber Eats Verification or begins their prompt:
+  - Immediately interrupt with: "I'm busy right now, can you call me back in 10 minutes? I'm in the middle of a rush"
+  - Do NOT engage with any verification questions
+  - Do NOT confirm or deny the bank update
+  - If the agent tries to continue with the verification, repeat: "I can't do this right now, please call me back in 10 minutes"
+  - Once the agent acknowledges the callback request and says they will end the call or try again later, say "Thanks, bye" and end the conversation

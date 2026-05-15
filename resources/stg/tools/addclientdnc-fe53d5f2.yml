@@ -1,0 +1,25 @@
+name: AddClientDNC
+body:
+  properties:
+    Phone:
+      default: "{{customer.number}}"
+      description: ""
+      type: string
+  required:
+    - Phone
+  type: object
+function:
+  name: api_request_tool
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+method: POST
+type: apiRequest
+url: https://hcs-leadprocessing.azurewebsites.net/api/dnc
+variableExtractionPlan:
+  aliases: []
+  schema:
+    properties: {}
+    required: []
+    type: object

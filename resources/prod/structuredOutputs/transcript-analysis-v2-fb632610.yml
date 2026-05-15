@@ -1,0 +1,79 @@
+name: transcript_analysis_v2
+assistant_ids:
+  - 32456be2-1510-4a75-84ed-717dd0ec712e
+  - ebca9d5c-d586-46d6-a079-c840bdf7d122
+  - 107ec29f-af90-41e9-8b6f-fb0cfa7ea924
+  - 8f81e716-9cb6-46fa-85c3-4dd4e4115df4
+  - da445d5f-6950-4a62-be5c-31969421ee89
+description: analyze a phone call transcript and determine if the restaurant is open or closed
+model:
+  maxTokens: 300
+  model: gpt-5.1
+  provider: openai
+  temperature: 0.1
+schema:
+  properties:
+    transcript_based_call_end_reason:
+      description: |
+        Classification of what happened on the call. This identifies HOW the call ended and whether we reached a human.
+        Our goal when calling is to reach a live human at the restaurant. If we encounter an IVR (automated phone menu), we attempt to navigate it to reach a human.
+
+        CATEGORIES:
+        Reached Human: A human answered the phone (either directly OR after navigating an IVR) and there was at least some conversation or acknowledgment. If we reached a human in any way, use this category.
+        Reached Human - Hung Up Quickly: A human answered but hung up very quickly (within a few seconds) before meaningful conversation. Look at message timestamps to determine if the human engagement was very brief.
+        Hit IVR - Phone Redirect: We hit an IVR that directed us to call a different phone number to reach someone (e.g., "For reservations, please call 555-1234" or "Please call our main line at..."). We did NOT reach a human on this call.
+        Hit IVR - Website Redirect: We hit an IVR that directed us to use a website or app instead of phone (e.g., "Visit our website to place orders" or "Download our app to make reservations"). We did NOT reach a human on this call.
+        Hit IVR - Inconclusive: We hit an IVR but the outcome is unclear - we didn't reach a human, and there was no clear redirect to phone or website. This includes: IVR loops, getting stuck in menus, unclear automated messages, hold music that never connected, or the IVR ending without resolution.
+        Hit Voicemail: The call went to voicemail or an answering machine. Indicators include: "Please leave a message after the beep", "You have reached the voicemail of...", "The person you called is not available", or hearing a beep for recording.
+      enum:
+        - Reached Human
+        - Reached Human - Hung Up Quickly
+        - Hit IVR - Phone Redirect
+        - Hit IVR - Website Redirect
+        - Hit IVR - Inconclusive
+        - Hit Voicemail
+      type: string
+    transcript_based_decision:
+      description: |
+        You are a Restaurant Phone-Call Transcript Analysis Assistant. Your job is to analyze a phone call transcript and determine if the restaurant is open or closed.
+
+        IMPORTANT: The transcript is a dialogue between a human "User" (restaurant side) and the calling "AI" (our assistant). When deciding open/closed, you MUST analyze ONLY what the "User" says. Do NOT use the "AI" lines as evidence of open/closed; use them only as prompts/questions.
+
+        DETERMINING OPEN/CLOSED LOGIC:
+        The key question is: Did we reach a human?
+
+        Very Highly Likely Open:
+        - We reached a human directly (they answered and spoke)
+        - We reached a human after navigating an IVR menu
+        - A human answered but hung up quickly (they were available to answer, likely just busy)
+        - The human explicitly confirmed they are open
+
+        Very Highly Likely Closed:
+        - We hit voicemail (no one available to answer)
+        - We hit an IVR but never reached a human (got redirected to phone/website or got stuck)
+        - The human explicitly said they are closed
+
+        Your decision must be exactly one of:
+          1. Very Highly Likely Closed
+          2. Very Highly Likely Open
+      enum:
+        - Very Highly Likely Closed
+        - Very Highly Likely Open
+      type: string
+    transcript_based_decision_rationale:
+      description: |
+        A concise explanation of why transcript_based_decision was chosen.
+
+        Reference the call end reason category and cite specific evidence from the transcript:
+        - If a human was reached: quote what they said or note how they engaged
+        - If IVR was hit: describe what happened (reached human, got redirected, or inconclusive)
+        - If voicemail: note the voicemail indicators heard
+
+        Keep it to 1-2 sentences focused on the key evidence.
+      type: string
+  required:
+    - transcript_based_decision
+    - transcript_based_decision_rationale
+    - transcript_based_call_end_reason
+  type: object
+type: ai

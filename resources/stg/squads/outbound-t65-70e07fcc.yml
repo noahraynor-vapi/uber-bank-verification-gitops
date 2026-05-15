@@ -1,0 +1,32 @@
+name: Outbound T65
+members:
+  - assistantId: vm-detection-907af3cf
+    assistantOverrides:
+      metadata:
+        position:
+          x: 421.0572513724027
+          y: 375.73641836791296
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: outbound-call-fronter-t65-b12f69c3
+              assistantName: Outbound Call Fronter T65
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_assistant
+          messages:
+            - blocking: false
+              content: Hello, this is Sarah calling from the Medicare Enrollment Center on a recorded line. Am I speaking with {{customer.name}}?
+              type: request-start
+          type: handoff
+      voice:
+        model: eleven_flash_v2
+        provider: 11labs
+        voiceId: X03mvPuTfprif8QBAVeJ
+  - assistantId: outbound-call-fronter-t65-b12f69c3
+    assistantOverrides:
+      metadata:
+        position:
+          x: 897.7670444947523
+          y: 371.1416251811915

@@ -1,0 +1,5 @@
+dev - uber-gitops organization
+prod - Antriksh Uber organization
+stg - hcs
+
+hcs squad moved to prod then replaced prompt with uber verification prompt

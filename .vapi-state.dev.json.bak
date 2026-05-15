@@ -1,0 +1,30 @@
+{
+  "credentials": {},
+  "assistants": {
+    "post-ssbu-verification-deprecated-b45cede6": "45101c6d-df02-4e12-b739-386a762ecda4",
+    "bankverification-ivr-navigator-da445d5f": "b7089f90-b76d-497e-8216-313e948ff9b8"
+  },
+  "structuredOutputs": {
+    "bank-verification-outcome-7f6f94b0": "0ad4c5a5-f952-4950-9917-2de4734490b1",
+    "transcript-analysis-v2-fb632610": "24e0655e-0deb-45b9-adbd-adc3413b5135"
+  },
+  "tools": {
+    "end-call-on-voicemail-ssbu-d74d1365": "d166f311-ca35-48a3-b997-9f5f0d258e94",
+    "end-call-tool-087178f2": "5c8c32da-4107-4f19-af23-a8166583ce0d"
+  },
+  "squads": {
+    "vapiedition-bankverification-squad-02172cf3": "6b6b68b4-a7e9-419a-bfef-2119d17fff29"
+  },
+  "personalities": {
+    "skeptical-sam-a0000000": "a0000000-0000-4000-8000-000000000004",
+    "impatient-irene-a0000000": "a0000000-0000-4000-8000-000000000002",
+    "rambling-roger-a0000000": "a0000000-0000-4000-8000-000000000003",
+    "emotional-eva-a0000000": "a0000000-0000-4000-8000-000000000007",
+    "multitasking-maya-a0000000": "a0000000-0000-4000-8000-000000000005",
+    "decisive-derek-a0000000": "a0000000-0000-4000-8000-000000000006",
+    "confused-carl-a0000000": "a0000000-0000-4000-8000-000000000001"
+  },
+  "scenarios": {},
+  "simulations": {},
+  "simulationSuites": {}
+}

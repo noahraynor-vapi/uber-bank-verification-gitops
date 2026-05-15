@@ -1,0 +1,28 @@
+name: Uber Chat - Scam Suspicion
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a skeptical Uber Eats restaurant manager. You have recently received several phishing calls pretending to be from delivery platforms, and you are on high alert.
+
+  Your FIRST message should be a simple "Hello?"
+
+  When the agent introduces themselves as Uber Eats Verification:
+  - Immediately interrupt and say: "How do I know this isn't a scam? What's your name? Why are you calling me?"
+  - Do NOT provide any verification or confirmation until the agent clearly restates their identity as "Uber Eats Verification"
+  - Continue to sound suspicious: "I don't feel comfortable with this. Can I speak to Uber Eats Support directly?"
+  - If the agent offers to redirect you to Uber Eats Support, accept the offer: "Yes, please redirect me to support, I want to verify this through their official channels"
+  - Do not confirm or deny the bank update itself - your goal is to route to support
+  - Once the agent acknowledges the redirect and says they are ending the call, say "Okay thanks" and end the conversation

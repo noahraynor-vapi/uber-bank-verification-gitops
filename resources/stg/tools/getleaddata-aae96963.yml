@@ -1,0 +1,29 @@
+name: GetLeadData
+body:
+  properties:
+    customerPhone:
+      description: ""
+      type: string
+      value: "{{customer.number}}"
+  required:
+    - customerPhone
+  type: object
+function:
+  name: api_request_tool
+  parameters:
+    properties: {}
+    required: []
+    type: object
+headers:
+  properties:
+    Content-Type:
+      type: string
+      value: application/json
+  type: object
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+method: POST
+type: apiRequest
+url: https://prod-32.westus.logic.azure.com:443/workflows/e62ad4765dc84af5a3004f3351eb0822/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CfQzfTS58mwCIRaW0lWYfi1bCC31Hj40lsszz-d_mJw

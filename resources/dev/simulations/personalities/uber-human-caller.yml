@@ -1,0 +1,7 @@
+name: Uber Human Caller
+assistant:
+  firstMessage: ""
+  firstMessageMode: assistant-speaks-first-with-model-generated-message
+  model:
+    model: gpt-4.1
+    provider: openai

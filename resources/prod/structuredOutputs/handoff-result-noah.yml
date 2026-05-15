@@ -1,0 +1,29 @@
+name: Handoff Result - Noah
+assistant_ids: []
+description: Evaluation-only structured output. Classifies what the VM Detection assistant did on a call based on tool calls in the transcript. Not attached to any assistant to avoid per-call LLM cost in production.
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: |
+    Examine the full message history for tool calls made during the call by the VM Detection assistant (the first member of the squad).
+
+    Classify the outcome as one of the following enum values:
+
+    - HANDED_OFF: The transcript contains a tool call with function name "handoff_to_fronter". This means VM Detection identified a live human and routed the call to the fronter assistant. This is the correct outcome when a human answers.
+
+    - DETECTED_VOICEMAIL: The transcript contains a tool call with function name "end_on_voicemail". This means VM Detection identified that the call was answered by a voicemail system and ended the call. This is the correct outcome when a voicemail answers.
+
+    - NEITHER: The transcript contains neither a "handoff_to_fronter" nor an "end_on_voicemail" tool call. This typically indicates the call silence-timed-out, the tester ended the call prematurely, or the squad flow failed in some other way.
+
+    Priority rules (in case of ambiguity):
+    1. If BOTH tool calls appear in the transcript (which should not normally happen), return HANDED_OFF.
+    2. Only look at tool calls explicitly present in the message history. Do not infer outcomes from the content of text messages — only from actual tool_calls entries.
+    3. If no tool calls are present at all, return NEITHER.
+  enum:
+    - HANDED_OFF
+    - DETECTED_VOICEMAIL
+    - NEITHER
+  type: string
+target: messages
+type: ai

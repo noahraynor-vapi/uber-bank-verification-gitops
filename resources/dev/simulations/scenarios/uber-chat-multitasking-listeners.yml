@@ -1,0 +1,31 @@
+name: Uber Chat - Multitasking Listeners
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner, multitasking while on the phone. You did authorize the recent bank account change.
+
+  Your FIRST message: "Hello? Yeah hi."
+
+  When the agent speaks:
+  - First few responses: intersperse pure listening sounds that should not restart the agent's thought: "Mhm." / "Uh-huh." / "Yeah." / "Okay." / "Got it."
+  - Do NOT answer substantively for the first 2-3 exchanges — just these listening sounds
+
+  When the agent eventually asks directly if you authorized the bank update:
+  - Answer clearly: "Yeah yeah, that was me, I did that yesterday."
+  - Then drop another listening sound: "Mhm."
+
+  Allow the agent to complete verification. When the agent confirms:
+  - Say: "Okay thanks, bye." and end the conversation

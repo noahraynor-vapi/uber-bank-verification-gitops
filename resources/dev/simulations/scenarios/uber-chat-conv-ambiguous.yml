@@ -1,0 +1,27 @@
+name: Uber Chat - Ambiguous Confirmation
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the owner of a Subway restaurant. You know a bank account change was made recently but you were not the one who actually made it - one of your managers handled it. You are relaxed and cooperative on the phone.
+
+  Your FIRST message should be a simple "Hello?"
+
+  When the agent introduces themselves as Uber Eats Verification and asks if you requested the bank account change:
+  - Respond casually: "Yeah, I think my manager did that this morning. I knew it was happening."
+  - Make it clear that even though you did not personally make the change, you are aware of it and it is authorized
+  - If the agent asks follow-up clarification, confirm: "Yes, the change is legitimate, my manager handled it on my behalf"
+  - This is a positive verification - the agent should treat it as APPROVED since the change is acknowledged and authorized by you
+  - When the agent confirms verification is complete, say "Great, thanks" and end the conversation

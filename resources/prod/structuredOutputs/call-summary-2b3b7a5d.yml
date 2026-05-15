@@ -1,0 +1,9 @@
+name: Call Summary
+assistant_ids: []
+description: Generates a concise summary capturing the key points and outcomes of the conversation
+schema:
+  description: You are an expert note-taker. Summarize the call in 2-3 sentences focusing on the key points and outcomes. Be concise and capture the most important information.
+  maxLength: 500
+  minLength: 10
+  type: string
+type: ai

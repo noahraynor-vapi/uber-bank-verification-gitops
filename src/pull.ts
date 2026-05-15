@@ -439,6 +439,40 @@ function resolveReferencesToResourceIds(
             return dest;
           });
         }
+        // Resolve assistantId in assistantOverrides['tools:append'] handoff destinations
+        if (
+          member.assistantOverrides &&
+          typeof member.assistantOverrides === "object"
+        ) {
+          const overrides = {
+            ...(member.assistantOverrides as Record<string, unknown>),
+          };
+          const toolsAppend = overrides["tools:append"];
+          if (Array.isArray(toolsAppend)) {
+            overrides["tools:append"] = (
+              toolsAppend as Record<string, unknown>[]
+            ).map((tool) => {
+              if (!Array.isArray(tool.destinations)) return tool;
+              return {
+                ...tool,
+                destinations: (
+                  tool.destinations as Record<string, unknown>[]
+                ).map((dest) => {
+                  if (typeof dest.assistantId === "string") {
+                    return {
+                      ...dest,
+                      assistantId:
+                        assistantsMap.get(dest.assistantId) ??
+                        dest.assistantId,
+                    };
+                  }
+                  return dest;
+                }),
+              };
+            });
+          }
+          resolvedMember.assistantOverrides = overrides;
+        }
         return resolvedMember;
       },
     );
@@ -461,6 +495,57 @@ function resolveReferencesToResourceIds(
     resolved.simulationIds = (resolved.simulationIds as string[]).map(
       (uuid: string) => simulationsMap.get(uuid) ?? uuid,
     );
+  }
+
+  // Resolve evaluations[].structuredOutputId in scenarios
+  if (Array.isArray(resolved.evaluations)) {
+    resolved.evaluations = (
+      resolved.evaluations as Record<string, unknown>[]
+    ).map((evaluation) => {
+      if (typeof evaluation.structuredOutputId === "string") {
+        return {
+          ...evaluation,
+          structuredOutputId:
+            structuredOutputsMap.get(evaluation.structuredOutputId) ??
+            evaluation.structuredOutputId,
+        };
+      }
+      return evaluation;
+    });
+  }
+
+  // Resolve references inside nested 'assistant' field (for personalities)
+  // Personalities embed a full assistant config. Without this block, nested
+  // toolIds and structuredOutputIds would stay as raw UUIDs on pull.
+  if (resolved.assistant && typeof resolved.assistant === "object") {
+    const assistant = { ...(resolved.assistant as Record<string, unknown>) };
+
+    if (assistant.model && typeof assistant.model === "object") {
+      const model = { ...(assistant.model as Record<string, unknown>) };
+      if (Array.isArray(model.toolIds)) {
+        model.toolIds = (model.toolIds as string[]).map(
+          (uuid) => toolsMap.get(uuid) ?? uuid,
+        );
+      }
+      assistant.model = model;
+    }
+
+    if (
+      assistant.artifactPlan &&
+      typeof assistant.artifactPlan === "object"
+    ) {
+      const artifactPlan = {
+        ...(assistant.artifactPlan as Record<string, unknown>),
+      };
+      if (Array.isArray(artifactPlan.structuredOutputIds)) {
+        artifactPlan.structuredOutputIds = (
+          artifactPlan.structuredOutputIds as string[]
+        ).map((uuid) => structuredOutputsMap.get(uuid) ?? uuid);
+      }
+      assistant.artifactPlan = artifactPlan;
+    }
+
+    resolved.assistant = assistant;
   }
 
   return resolved;
@@ -632,32 +717,23 @@ export async function pullResourceType(
   const newStateSection: Record<string, string> = resourceIds?.length
     ? { ...state[resourceType] }
     : {};
-  const existingResourceIds = bootstrap
-    ? []
-    : listExistingResourceIds(resourceType);
+  const existingResourceIds = listExistingResourceIds(resourceType);
 
   let created = 0;
   let updated = 0;
   let skipped = 0;
 
   for (const resource of resources) {
-    // Check if we already have this resource in state (by UUID)
+    // Check if we already have this resource in state (by UUID) — UUID match is authoritative
     let resourceId = reverseMap.get(resource.id);
-    if (resourceId && !resourceIdMatchesName(resourceId, resource)) {
-      delete newStateSection[resourceId];
-      resourceId = undefined;
-    }
 
     if (!resourceId) {
       // Reuse an existing file's resourceId if the name matches (cross-env pull)
-      resourceId = bootstrap
-        ? generateResourceId(resource)
-        : (findExistingResourceId(existingResourceIds, resource) ??
-          generateResourceId(resource));
+      resourceId =
+        findExistingResourceId(existingResourceIds, resource) ??
+        generateResourceId(resource);
     }
-    const isNew =
-      !reverseMap.get(resource.id) ||
-      !resourceIdMatchesName(resourceId, resource);
+    const isNew = !reverseMap.get(resource.id);
 
     removeUuidMappings(newStateSection, resource.id, resourceId);
 
@@ -835,19 +911,15 @@ export async function runPull(options: PullOptions = {}): Promise<PullResult> {
 
   // Pull in reverse-resolution order: pull resources that are referenced by others first,
   // so their state is populated when resolving references (UUID → resourceId) in dependent types.
-  // e.g. structuredOutputs reference assistants, so assistants must be pulled first.
+  // tools and structuredOutputs are pulled before assistants so that assistants can resolve
+  // model.toolIds and artifactPlan.structuredOutputIds on first pull.
+  // assistant_ids on structured outputs are resolved during push via a post-apply linking pass,
+  // so they don't need assistants in state during pull.
   const shouldPull = (type: ResourceType) =>
     !typeFilter?.length || typeFilter.includes(type);
 
   if (shouldPull("tools"))
     stats.tools = await pullResourceType("tools", state, {
-      changedFiles,
-      force,
-      bootstrap,
-      resourceIds,
-    });
-  if (shouldPull("assistants"))
-    stats.assistants = await pullResourceType("assistants", state, {
       changedFiles,
       force,
       bootstrap,
@@ -859,6 +931,13 @@ export async function runPull(options: PullOptions = {}): Promise<PullResult> {
       state,
       { changedFiles, force, bootstrap, resourceIds },
     );
+  if (shouldPull("assistants"))
+    stats.assistants = await pullResourceType("assistants", state, {
+      changedFiles,
+      force,
+      bootstrap,
+      resourceIds,
+    });
   if (shouldPull("squads"))
     stats.squads = await pullResourceType("squads", state, {
       changedFiles,

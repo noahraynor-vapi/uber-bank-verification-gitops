@@ -262,6 +262,27 @@ export function resolveReferences(
           }
         }
       }
+      // Resolve assistantId in assistantOverrides['tools:append'] handoff destinations
+      if (
+        member.assistantOverrides &&
+        typeof member.assistantOverrides === "object"
+      ) {
+        const overrides = member.assistantOverrides as Record<string, unknown>;
+        const toolsAppend = overrides["tools:append"];
+        if (Array.isArray(toolsAppend)) {
+          for (const tool of toolsAppend as Record<string, unknown>[]) {
+            if (!Array.isArray(tool.destinations)) continue;
+            for (const dest of tool.destinations as Record<string, unknown>[]) {
+              if (typeof dest.assistantId === "string") {
+                const resolvedId = resolveAssistantId(dest.assistantId, state);
+                if (resolvedId) {
+                  dest.assistantId = resolvedId;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -294,7 +315,7 @@ export function resolveReferences(
     for (const evaluation of resolved.evaluations as Record<string, unknown>[]) {
       if (typeof evaluation.structuredOutputId === "string") {
         const cleanId = evaluation.structuredOutputId.split("##")[0]?.trim() ?? "";
-        
+
         // If already a UUID, keep it as-is
         if (isUUID(cleanId)) {
           evaluation.structuredOutputId = cleanId;
@@ -308,6 +329,39 @@ export function resolveReferences(
         }
       }
     }
+  }
+
+  // Resolve references inside nested 'assistant' field (for personalities)
+  // Personalities embed a full assistant config; its toolIds and
+  // structuredOutputIds are referenced as slugs and must resolve to UUIDs.
+  if (resolved.assistant && typeof resolved.assistant === "object") {
+    const assistant = { ...(resolved.assistant as Record<string, unknown>) };
+
+    if (assistant.model && typeof assistant.model === "object") {
+      const model = { ...(assistant.model as Record<string, unknown>) };
+      if (Array.isArray(model.toolIds)) {
+        model.toolIds = resolveToolIds(model.toolIds as string[], state);
+      }
+      assistant.model = model;
+    }
+
+    if (
+      assistant.artifactPlan &&
+      typeof assistant.artifactPlan === "object"
+    ) {
+      const artifactPlan = {
+        ...(assistant.artifactPlan as Record<string, unknown>),
+      };
+      if (Array.isArray(artifactPlan.structuredOutputIds)) {
+        artifactPlan.structuredOutputIds = resolveStructuredOutputIds(
+          artifactPlan.structuredOutputIds as string[],
+          state
+        );
+      }
+      assistant.artifactPlan = artifactPlan;
+    }
+
+    resolved.assistant = assistant;
   }
 
   return resolved;

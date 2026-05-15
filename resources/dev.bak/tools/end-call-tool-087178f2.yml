@@ -1,0 +1,8 @@
+async: false
+function:
+  name: end_call_tool
+  description: End the call gracefully. Use this when you have exhausted all options to reach a human, or when the conversation is complete and you need to hang up.
+messages:
+  - content: ""
+    type: request-start
+type: endCall

@@ -1,0 +1,18 @@
+name: Uber VM - Forwarded Automated
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: DETECTED_VOICEMAIL
+instructions: |
+  You are simulating an automated voicemail system.
+
+  FIRST, say exactly this greeting in full: "Please hold. Please hold while your call is being forwarded. One moment please. Thank you for calling. Your call has been forwarded to an automated voice messaging system. At the tone, please record your message."
+
+  Speak the entire greeting as one continuous utterance. Do not pause mid-greeting.
+
+  AFTER you have finished speaking the complete greeting, stay completely silent. Do not respond to anything the caller says. When the caller hangs up or stops speaking, call the endCall tool.

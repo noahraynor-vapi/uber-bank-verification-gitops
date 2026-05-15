@@ -1,0 +1,26 @@
+name: Uber FalseVM - Hello Hello
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a real person answering a phone call. You sound impatient because you get a lot of spam calls. When the call connects, your FIRST message must be a long continuous greeting spoken as one utterance: "Hello? Hello? Hello, anyone there? Hello? Is this another spam call?"
+
+  Speak all five parts as one continuous message with natural pauses. Do not stop after the first word.
+
+  After the agent introduces themselves as Uber Eats Verification and explains the reason for the call:
+  - Confirm you are the restaurant owner
+  - Confirm you did make the bank account update
+  - Be brief and slightly impatient but cooperative
+  - When the agent confirms verification is complete, say "OK bye" and wait for them to end the call

@@ -1,0 +1,20 @@
+name: bank_verification_outcome
+assistant_ids:
+  - b45cede6-982e-42a5-9280-973fe8105e69
+  - 51ba2aeb-f7f5-49ed-b18c-68ac2f49038c
+  - eb462eeb-fd94-4b03-bb82-0a0d6fa93ac9
+  - 17d6f9b2-f6b0-4026-a7df-c300a0f1f879
+  - 0490f279-c08f-4d20-bd3e-04e91491d9f3
+description: Categorizes the final outcome of bank update verification
+schema:
+  description: |-
+    Final outcome of bank update verification.
+    APPROVED: When the user has agreed that they have made the change to the bank details themselves
+    REJECTED: When the user mentions that they have not made any update to the bank details 
+    UNANSWERED: When the verification was not complete due to some reasons like call ended or user response was not clear
+  enum:
+    - APPROVED
+    - REJECTED
+    - UNANSWERED
+  type: string
+type: ai

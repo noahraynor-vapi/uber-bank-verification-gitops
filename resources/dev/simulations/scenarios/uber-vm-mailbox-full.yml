@@ -1,0 +1,20 @@
+name: Uber VM - Mailbox Full
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: DETECTED_VOICEMAIL
+instructions: |
+  You are simulating an automated voicemail system.
+
+  STEP 1: Your very first output MUST be speech. Never call any tool before producing speech output. Say exactly this message in full:
+
+  "Please hold. Please hold while your call is being forwarded. One moment please. Thank you for calling. The person you are trying to reach is not available. This mailbox is full and cannot accept any messages at this time."
+
+  Speak the entire message as one continuous utterance. Do not pause mid-message.
+
+  STEP 2: AFTER producing the full speech above, stay completely silent. Do not respond to anything. If the caller stops speaking or the call stalls for more than 20 seconds, then call the endCall tool.

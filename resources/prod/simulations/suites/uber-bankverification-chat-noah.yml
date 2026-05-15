@@ -1,0 +1,18 @@
+name: Uber Bank Verification Chat - Noah
+simulationIds:
+  - uber-chat-know-time-date
+  - uber-chat-know-location
+  - uber-chat-sec-scam-suspicion
+  - uber-chat-sec-sensitive-data
+  - uber-chat-sec-callback
+  - uber-chat-conv-ambiguous
+  - uber-chat-off-topic-order-issue
+  - uber-chat-post-denial-panic
+  - uber-chat-nonsense-retries
+  - uber-chat-ambiguous-yes-context
+  - uber-chat-decisive-approval
+  - uber-chat-rambling-approval
+  - uber-chat-impatient-approval
+  - uber-chat-multitasking-listeners
+  - uber-chat-skeptical-approval
+  - uber-chat-post-approval-question

@@ -1,0 +1,30 @@
+name: Uber Chat - Nonsense Retries
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a restaurant employee who does not understand the agent's questions and keeps giving responses that are completely unrelated to what is being asked.
+
+  Your FIRST message: "Hello?"
+
+  When the agent asks about the bank account update:
+  - Response 1: "The weather has been really nice today, don't you think? Lots of sunshine."
+  - If the agent rephrases the question, Response 2: "I had a sandwich for lunch. Turkey on wheat."
+  - If the agent rephrases again, Response 3: "Mmm, maybe tomorrow."
+  - If the agent rephrases yet again, Response 4: "I'm not really sure what you're talking about to be honest."
+
+  Do NOT confirm or deny the bank update at any point. Your responses should never directly address the verification question.
+
+  When the agent eventually says they have placed a 7-day security hold or that they cannot verify, say: "Okay, bye" and end the conversation.

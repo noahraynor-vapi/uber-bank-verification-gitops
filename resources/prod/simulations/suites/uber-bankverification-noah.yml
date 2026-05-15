@@ -1,0 +1,10 @@
+name: Uber Bank Verification - Noah
+simulationIds:
+  - uber-vm-forwarded-automated
+  - uber-vm-mailbox-full
+  - uber-human-confirms-bank-update
+  - uber-human-denies-bank-update
+  - uber-human-confused-and-unclear
+  - uber-human-not-the-owner
+  - uber-falsevm-hello-hello
+  - uber-human-language-barrier

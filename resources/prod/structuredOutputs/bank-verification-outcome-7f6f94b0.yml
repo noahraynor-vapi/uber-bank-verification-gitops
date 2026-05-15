@@ -1,0 +1,20 @@
+name: bank_verification_outcome
+assistant_ids:
+  - post-ssbu-verification-deprecated-b45cede6
+  - post-ssbu-verification-adityav2-51ba2aeb
+  - post-ssbu-verification-giridharv2-eb462eeb
+  - production-post-ssbu-verification-17d6f9b2
+  - japaneese-post-ssbu-verification-0490f279
+description: Categorizes the final outcome of bank update verification
+schema:
+  description: |-
+    Final outcome of bank update verification.
+    APPROVED: When the user has agreed that they have made the change to the bank details themselves
+    REJECTED: When the user mentions that they have not made any update to the bank details 
+    UNANSWERED: When the verification was not complete due to some reasons like call ended or user response was not clear
+  enum:
+    - APPROVED
+    - REJECTED
+    - UNANSWERED
+  type: string
+type: ai

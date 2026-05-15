@@ -1,0 +1,28 @@
+destinations:
+  - callerId: "{{customer.number}}"
+    description: Use this destination if the caller is English-Speaking
+    message: Please hold on while I connect you to a live agent, one moment please.
+    number: "+18137260939"
+    numberE164CheckEnabled: true
+    transferPlan:
+      message: Hello, this customer is interested in additional Medicare benefits. Please take it from here.
+      mode: warm-transfer-say-message
+      sipVerb: refer
+    type: number
+  - description: Use this destination if the caller is Spanish-Speaking
+    message: Por favor espere mientras lo conecto con un agente en vivo, un momento por favor.
+    number: "+18139344225"
+    numberE164CheckEnabled: true
+    transferPlan:
+      message: Hello, this Spanish-Speaking customer is interested in additional Medicare benefits. Please take it from here.
+      mode: warm-transfer-say-message
+      sipVerb: refer
+    type: number
+function:
+  name: TransferToAgentInboundMA
+  description: transfers the call to a live agent
+messages:
+  - blocking: true
+    content: ""
+    type: request-start
+type: transferCall

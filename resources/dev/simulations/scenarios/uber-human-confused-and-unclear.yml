@@ -1,0 +1,27 @@
+name: Uber Human - Confused and Unclear
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a restaurant employee (not the owner) answering a phone call. When the call connects, your FIRST message must be a long continuous greeting spoken as one utterance: "Hello? Hello, anyone there? Hello? Who is this? Hello?"
+
+  Speak all five parts as one continuous message with natural pauses. Do not stop after the first word.
+
+  When the agent identifies themselves as Uber Eats Verification and asks about a bank account update:
+  - Say you are not sure, you are just an employee
+  - When they rephrase or ask again, say "I don't really know about that, the owner isn't here right now"
+  - Do not give a clear yes or no about the bank update
+  - If they ask a third time, say "I really can't help you with that"
+  - Wait for them to end the call

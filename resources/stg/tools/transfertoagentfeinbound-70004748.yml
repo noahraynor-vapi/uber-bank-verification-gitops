@@ -1,0 +1,19 @@
+async: false
+destinations:
+  - callerId: "{{customer.number}}"
+    description: Use this destination if the caller is English-Speaking
+    message: Please hold on while I connect you to a live agent, one moment please.
+    number: "+19413371931"
+    numberE164CheckEnabled: true
+    transferPlan:
+      message: Hello, this customer is interested in Final Expense policy. Please take it from here.
+      mode: warm-transfer-say-message
+      sipVerb: refer
+    type: number
+function:
+  name: TransferToAgentFEInbound
+  description: transfers the call to a live agent
+messages:
+  - blocking: false
+    type: request-start
+type: transferCall

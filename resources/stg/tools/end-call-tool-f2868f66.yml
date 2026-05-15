@@ -1,0 +1,11 @@
+function:
+  name: end_call_tool
+  parameters:
+    properties: {}
+    required: []
+    type: object
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+type: endCall

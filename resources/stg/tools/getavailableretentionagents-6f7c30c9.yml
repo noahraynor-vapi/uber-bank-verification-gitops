@@ -1,0 +1,24 @@
+name: GetAvailableRetentionAgents
+function:
+  name: api_request_tool
+messages:
+  - blocking: false
+    type: request-start
+method: GET
+type: apiRequest
+url: https://api.convoso.com/v1/agent-monitor/search?auth_token=1k8r1tngghwi77j7ynw4serohrfq1t7t&campaign_id=758
+variableExtractionPlan:
+  aliases:
+    - key: AvailableAgents
+      value: "{{ data.available_agents }}"
+  schema:
+    properties:
+      data:
+        description: ""
+        properties:
+          available_agents:
+            description: ""
+            type: string
+        type: object
+    required: []
+    type: object

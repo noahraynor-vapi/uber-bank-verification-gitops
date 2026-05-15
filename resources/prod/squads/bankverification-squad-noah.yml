@@ -1,0 +1,31 @@
+name: BankVerification Squad-Noah
+members:
+  - assistantId: vm-detection-noah
+    assistantOverrides:
+      metadata:
+        position:
+          x: 250
+          y: 100
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: fronter-noah
+              assistantName: Post SSBU verification-Noah
+              contextEngineeringPlan:
+                type: all
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_fronter
+          messages:
+            - blocking: true
+              content: Hi there, this is Uber Eats Verification. This call is recorded for quality and security purposes.
+              type: request-start
+          type: handoff
+      voice: null
+  - assistantId: fronter-noah
+    assistantOverrides:
+      metadata:
+        position:
+          x: 650
+          y: 100

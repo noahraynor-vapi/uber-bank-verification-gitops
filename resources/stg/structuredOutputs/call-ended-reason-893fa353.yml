@@ -1,0 +1,19 @@
+name: Call Ended Reason
+assistant_ids: []
+description: Determines how the vm-detection assistant resolved the call
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: |-
+    Analyze the transcript to determine how the vm-detection assistant resolved this call:
+    Voicemail Detected - The assistant detected a voicemail system and called the end_on_voicemail tool, OR the call endedReason indicates voicemail was detected
+    Human Detected - The assistant detected a live human and called the handoff_to_fronter tool, OR the call was forwarded/transferred to another assistant
+    No Detection - The assistant did not make a detection decision, the call timed out, or ended for other reasons (silence timeout, error, etc.)
+  enum:
+    - Voicemail Detected
+    - Human Detected
+    - No Detection
+  type: string
+target: messages
+type: ai

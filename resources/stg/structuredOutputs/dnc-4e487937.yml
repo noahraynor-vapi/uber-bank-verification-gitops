@@ -1,0 +1,33 @@
+name: DNC
+assistant_ids:
+  - f804e82c-7483-4f32-820d-232dd3742db1
+  - f982f193-52c7-4c69-a8db-0392b48f87c0
+  - 332b2f8b-80d0-456f-8789-c7a1cde7b46d
+  - 85149310-9d83-4137-865d-fdfd125189f7
+  - 1fa1ca17-4525-478b-822f-3654ca23ed2f
+  - 00143413-7fdc-4a78-9904-70aab0cf2375
+  - e953bbfa-bb52-4c6c-a216-fd533990c016
+  - b12f69c3-e22d-4ea1-86b6-8fc52f506932
+  - f0cb79f0-a58b-49d5-bd60-a2701e83e33b
+  - 6c1c9665-233a-47c8-bd7d-e827ac5689fd
+  - 71f7c1e4-513d-4488-9d45-0024011e7755
+  - 5251a139-bf1f-401d-bb2a-9df1f73ce035
+  - c3d45738-e44b-4aea-9807-d2db6c799915
+  - 2f03221e-92c6-45a9-ae65-98dca5fede21
+  - 2cd8f094-55c6-409d-82c3-0b18db8281e9
+description: If the caller requests to be added to the DNC list
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: |
+    Return True if:
+    - User uses foul language
+    - User says to be added/removed from list
+    - User states to stop calling them
+    - User states "you are on a recorded line" or a very similar message
+
+    Else: return False
+  type: boolean
+target: messages
+type: ai

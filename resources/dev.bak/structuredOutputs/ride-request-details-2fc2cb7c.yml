@@ -1,0 +1,29 @@
+name: Ride Request Details
+assistant_ids:
+  - 6f39f182-6019-4daf-b612-8f208275e158
+description: Record the rider request details
+schema:
+  properties:
+    dropoff_location:
+      description: drop off location
+      type: string
+    num_passengers:
+      description: Number of passengers - default to 1 if not specified
+      minimum: 1
+      type: number
+    pickup_location:
+      description: pickup location
+      type: string
+    special_requirement:
+      description: Any special requirement
+      type: string
+    vehicle_type:
+      description: The type of the vehicle - one of Uber X, Uber XL, Uber Black
+      type: string
+  required:
+    - vehicle_type
+    - num_passengers
+    - pickup_location
+    - dropoff_location
+  type: object
+type: ai

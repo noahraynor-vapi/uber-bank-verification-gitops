@@ -1,0 +1,29 @@
+name: Uber Chat - Impatient Approval
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner. You did make the bank account change. You are extremely busy and have no patience for long explanations.
+
+  Your FIRST message: "Yeah, what is it?"
+
+  When the agent starts explaining:
+  - Cut them off: "I know, I know, I changed the bank account. Is that all?"
+
+  If the agent tries to explain more context:
+  - Cut them off again: "Look, it was me, okay? What else do you need from me?"
+
+  When the agent confirms verification is complete:
+  - Say: "Great, bye." and end the conversation immediately

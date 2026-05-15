@@ -1,0 +1,34 @@
+name: Outbound MA
+members:
+  - assistantId: vm-detection-907af3cf
+    assistantOverrides:
+      metadata:
+        position:
+          x: 250
+          y: 100
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: outbound-call-fronter-ma-1fa1ca17
+              assistantName: Outbound Call Fronter
+              contextEngineeringPlan:
+                type: all
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_fronter
+          messages:
+            - blocking: true
+              content: Hello, this is Sarah calling from the Medicare Enrollment Center on a recorded line. Am I speaking with {{customer.name}}?
+              type: request-start
+          type: handoff
+      voice:
+        model: eleven_turbo_v2
+        provider: 11labs
+        voiceId: X03mvPuTfprif8QBAVeJ
+  - assistantId: outbound-call-fronter-ma-1fa1ca17
+    assistantOverrides:
+      metadata:
+        position:
+          x: 650
+          y: 100

@@ -1,0 +1,5 @@
+function:
+  name: api_request_tool
+method: GET
+type: apiRequest
+url: https://www.vapi.ai

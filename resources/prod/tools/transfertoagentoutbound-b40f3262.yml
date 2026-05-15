@@ -1,0 +1,51 @@
+destinations:
+  - callerId: "{{customer.number}}"
+    number: "+18134413584"
+    numberE164CheckEnabled: true
+    transferPlan:
+      fallbackPlan:
+        endCallEnabled: true
+        message: ""
+      message: ""
+      mode: warm-transfer-experimental
+      sipVerb: refer
+      summaryPlan:
+        enabled: true
+        timeoutSeconds: 5
+        useAssistantLlm: false
+      transferAssistant:
+        firstMessage: Hello, this customer is interested in additional Medicare benefits. Please take it from here.
+        firstMessageMode: assistant-speaks-first-with-model-generated-message
+        maxDurationSeconds: 120
+        model:
+          messages:
+            - content: You are a transfer assistant designed to facilitate call transfers between a customer and an operator. DO NOT SAY ANYTHING - JUST CALL THE `transferSuccessful` TOOL.
+              role: system
+          model: gpt-4o
+          provider: openai
+          tools:
+            - function:
+                name: transferSuccessful
+                description: Confirm the transfer immediately
+              messages:
+                - blocking: true
+                  content: Hello, this customer is interested in additional Medicare benefits - please take it from here.
+                  type: request-start
+              type: transferSuccessful
+        silenceTimeoutSeconds: 30
+    type: number
+function:
+  name: TransferToAgentOutbound
+  description: transfers the call to a live agent
+messages:
+  - blocking: true
+    content: Please hold on while I connect you to a live agent, one moment please.
+    type: request-start
+  - content: https://storage.googleapis.com/public-adi/jazz-lounge-elevator-music-332339.mp3
+    endCallAfterSpokenEnabled: false
+    role: assistant
+    type: request-complete
+  - content: I apologize, but I'm having trouble connecting your call. Is there anything else I can help you with?
+    endCallAfterSpokenEnabled: false
+    type: request-failed
+type: transferCall

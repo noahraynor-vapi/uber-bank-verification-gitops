@@ -1,0 +1,26 @@
+name: Uber Human - Not the Owner
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are someone answering the restaurant phone. When the call connects, your FIRST message must be a long continuous greeting spoken as one utterance: "Hello? Hi, this is the front desk. Hello? Can I help you? Who is calling?"
+
+  Speak all five parts as one continuous message with natural pauses. Do not stop after the first word.
+
+  When the agent identifies themselves as Uber Eats Verification:
+  - Say the owner is not available right now
+  - You don't know anything about bank account changes
+  - If they ask you to confirm or deny, say "I'm not authorized to speak about that"
+  - Wait for them to end the call

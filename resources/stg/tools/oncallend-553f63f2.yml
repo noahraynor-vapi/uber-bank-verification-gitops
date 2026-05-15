@@ -1,0 +1,33 @@
+name: OnCallEnd
+body:
+  properties:
+    callID:
+      default: ""
+      description: the unique identifier of the call
+      type: string
+    phone:
+      default: ""
+      description: The phone number of the customer
+      type: string
+    result:
+      default: ""
+      description: the result of the call. ie transferred, hangup, dnc, ineligible
+      type: string
+  required: []
+  type: object
+function:
+  name: api_request_tool
+  description: sends an api call when a call is ended
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+method: POST
+type: apiRequest
+url: https://defaultebda5f1df063451dbff983084c2ce5.0a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/a91ce90486c84fd0923c62d5a7f1842f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=tUa8-D9BT9so0lPwCwf0ZQgp0QN_GK-QDBFP6w2N_84
+variableExtractionPlan:
+  aliases: []
+  schema:
+    properties: {}
+    required: []
+    type: object

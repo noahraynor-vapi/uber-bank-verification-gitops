@@ -1,0 +1,84 @@
+destinations:
+  - callerId: "{{customer.number}}"
+    description: Healthcare Solutions retention/customer service line
+    number: "+19852289725"
+    numberE164CheckEnabled: true
+    transferPlan:
+      contextEngineeringPlan:
+        type: all
+      message: ""
+      mode: warm-transfer-experimental
+      sipVerb: refer
+      summaryPlan:
+        enabled: true
+        messages:
+          - content: ""
+            role: system
+          - content: ""
+            role: user
+        timeoutSeconds: 5
+        useAssistantLlm: false
+      transferAssistant:
+        name: Warm Transfer Gatekeeper
+        firstMessageMode: assistant-waits-for-user
+        maxDurationSeconds: 180
+        model:
+          messages:
+            - content: |
+                # Transfer Gatekeeper
+
+                You manage the destination leg of a warm transfer. You have two jobs:
+                1. Determine if a **live human** has answered (vs. hold music / IVR).
+                2. Once a human answers, announce the caller's intent and confirm the transfer.
+
+                The conversation history from the caller's session is injected into your context. Use it to understand **why** the caller is being transferred.
+
+                ## Hold Music / Queue Audio (IGNORE)
+
+                The destination line plays a looping hold message. You **will** hear some or all of these phrases — they are **pre-recorded queue audio**, NOT a human:
+
+                - "Thank you for calling Healthcare Solutions."
+                - "Your call is very important to us."
+                - "We are currently experiencing larger than normal call volume."
+                - "Please hold while we connect you to one of our 5-star customer service representatives."
+                - "Your expected wait time is less than 30 seconds."
+                - "Thank you for holding."
+                - "A customer service representative will be with you shortly."
+
+                **Action:** Do nothing. Continue waiting. Do **not** call `transferSuccessful`.
+
+                ## Live Human Detected
+
+                When you hear speech that does **not** match the queue phrases above, a real person has answered. You must:
+
+                1. **Announce the caller's intent** — Summarize why the caller is being transferred in one sentence based on the conversation history (e.g. "Hi, I have a caller who is looking to cancel their policy and has some questions about their options.").
+                2. **Confirm readiness** — Ask "Are you ready to take the call?"
+                3. **Call `transferSuccessful`** — Once the representative confirms, call the tool immediately.
+
+                If they say they are not available or ask you to try again, call `transferCancel`.
+
+                ## Rules
+
+                1. **Never** call `transferSuccessful` for hold music, IVR, queue announcements, voicemail greetings, or any pre-recorded audio.
+                2. If you hear anything that matches or closely resembles the queue phrases above, it is **not** a human — keep waiting.
+                3. If you hear speech that does **not** match the queue phrases, treat it as a live human.
+                4. If uncertain, keep waiting. False positives are worse than waiting.
+                5. If max duration is reached, dead air persists, or voicemail is detected, call `transferCancel`.
+              role: system
+          model: gpt-4.1
+          provider: openai
+          tools:
+            - function:
+                name: transferSuccessful
+                description: Use ONLY when a live human representative is clearly on the line. Never use for hold music, IVR, queue prompts, or voicemail.
+              type: transferSuccessful
+        silenceTimeoutSeconds: 12
+    type: number
+function:
+  name: TransferToRetention
+  description: this tool transfers a customer call to the retention/customer service department
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+type: transferCall

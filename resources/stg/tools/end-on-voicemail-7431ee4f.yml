@@ -1,0 +1,8 @@
+beepDetectionEnabled: false
+function:
+  name: end_on_voicemail
+  description: "End the call immediately if one of the following phrases are detected: 1. We are sorry, there is no one available to take your call. 2. Please leave a message for... 3. Please leave your name and phone and I'll get back to you as soon as I can. 4. Your call has been forwarded to voicemail, the person you are trying to reach is not available. 5. The person you're trying to reach is not available. 6. Hey, it's (user's name), leave a message. 7. Hey, you reached (user's name), please leave a message. 8. Hi/Hey, I'm not available, please leave a message. 9. The number you're trying to reach... 10. I'll get back to you as soon as possible. 11. This voicemail is not receiving any messages. 12. My voicemail is full, so if you need to reach me, please text me. 13. Leave a message and I'll call you back. 14. You've reached my cell phone, I'm not available. 15. We are sorry, there is no one available to take your call. 16. The number you have dialed is not in service. 17. The number you have dialed has been disconnected. 18. This number is no longer in service. 19. Cannot be completed as dialed. 20. The wireless customer you are calling is not available. 21. The subscriber you have dialed is not available. 22. The person at extension [number] is unavailable. 23. This mailbox is full and cannot accept any messages. 24. The mailbox belonging to [name] is full."
+messages:
+  - content: ""
+    type: request-start
+type: voicemail

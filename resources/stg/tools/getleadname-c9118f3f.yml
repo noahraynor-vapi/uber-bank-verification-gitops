@@ -1,0 +1,23 @@
+async: true
+function:
+  name: getLeadName
+  description: this tool sends the customers phone number to an endpoint returns the first name of the customer in the response body in the firstName property.
+  parameters:
+    properties:
+      phone:
+        default: ""
+        description: ""
+        enum:
+          - "{{customer.number}}"
+        type: string
+    required:
+      - phone
+    type: object
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+server:
+  headers: {}
+  url: https://prod-68.westus.logic.azure.com:443/workflows/4e132b2d0c254ff6af39b3482ed1fadb/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=yLk-Lu79ThiIkVuvJD547QpuRi0C1_gSn49X_PBDHUM
+type: function

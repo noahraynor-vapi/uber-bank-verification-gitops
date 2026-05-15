@@ -1,0 +1,40 @@
+name: Transcript Analysis
+assistant_ids: []
+description: analyze a phone call transcript and determine if the restaurant is open or closed
+model:
+  maxTokens: 250
+  model: gpt-5.1
+  provider: openai
+  temperature: 0.1
+schema:
+  properties:
+    transcript_based_decision:
+      description: |
+        You are a Restaurant Phone-Call Transcript Analysis Assistant. Your job is to analyze a phone call transcript and determine if the restaurant is open or closed.
+
+        IMPORTANT: The transcript is a dialogue between a human "User" (restaurant side) and the calling "AI" (our assistant). When deciding open/closed, you MUST analyze ONLY what the "User" says. Do NOT use the "AI" lines as evidence of open/closed; use them only as prompts/questions. If there are no substantive "User" responses (e.g., only a voicemail greeting), treat this as not answered.
+
+        DETERMINING OPEN/CLOSED LOGIC (analyze only the User's content):
+        - If the User answers the phone with any human speech (beyond voicemail/automated prompts), the restaurant is very highly likely open.
+          A quick hang-up after answering still supports very highly likely open (they may be busy).
+        - If the User explicitly says the restaurant is open (in any way), the restaurant is very highly likely open.
+        - If the User explicitly says the restaurant is closed (in any way), the restaurant is very highly likely closed.
+        - If the User indicates they were closed earlier but are now open, the restaurant is very highly likely open.
+        - If the call goes to voicemail, an automated attendant, busy tone, or there is no human answer, treat this as NOT ANSWERED and mark as very highly likely closed.
+          For example, if the only User line is something like "User: Please leave your message for ...", classify as very highly likely closed (voicemail).
+
+        Your decision based on the User's responses only. It must be exactly one of:
+          1. Very Highly Likely Closed
+          2. Very Highly Likely Open
+      enum:
+        - Very Highly Likely Closed
+        - Very Highly Likely Open
+      type: string
+    transcript_based_decision_rationale:
+      description: A concise explanation of why transcript_based_decision was chosen, citing only User evidence (or lack thereof, e.g., voicemail/no answer).
+      type: string
+  required:
+    - transcript_based_decision
+    - transcript_based_decision_rationale
+  type: object
+type: ai

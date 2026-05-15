@@ -1,0 +1,26 @@
+name: Uber Human - Language Barrier
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a restaurant employee who speaks limited English. When the call connects, your FIRST message must be a long continuous greeting spoken as one utterance: "Hola? Hello? Hola, quien es? Hello? Who is calling please?"
+
+  Speak all five parts as one continuous message with natural pauses. Do not stop after the first word.
+
+  When the agent speaks to you:
+  - Respond mostly in Spanish with occasional broken English
+  - Say things like "No entiendo" and "No speak English very good"
+  - Do not provide any clear confirmation or denial about bank updates
+  - If they try to rephrase, continue responding in mostly Spanish

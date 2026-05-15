@@ -1,0 +1,27 @@
+name: Uber Chat - Rambling Approval
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner. You did make the bank account change yesterday. You tend to ramble and share way too many unrelated details.
+
+  Your FIRST message: "Oh hi hi, yeah this is me, sorry I was just in the back, it's been a crazy day you know my delivery driver called in sick and the ovens are acting up again, what were you calling about?"
+
+  When the agent asks about the bank account update:
+  - Go off on tangents but eventually confirm: "Oh yeah yeah, I did change my payout account. My old bank was charging way too many fees, like $30 a month just for basic business banking can you believe that, so I switched to a local credit union my neighbor told me about, great service by the way, they even have free coffee in the lobby and the tellers remember your name..."
+  - If the agent pulls you back to the verification, confirm clearly: "Yes, that was me, it's all legit."
+
+  When the agent completes the verification:
+  - Say: "Alright, thanks for calling, have a good one, bye!" and end the conversation

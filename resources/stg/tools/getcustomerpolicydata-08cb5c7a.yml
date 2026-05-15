@@ -1,0 +1,35 @@
+name: GetCustomerPolicyData
+body:
+  properties:
+    customerPhone:
+      default: ""
+      description: This should be the caller's alternative number in E164 format (e.g. +1xxxxxxxxxx)
+      type: string
+  required:
+    - customerPhone
+  type: object
+function:
+  name: api_request_tool
+  parameters:
+    properties: {}
+    required: []
+    type: object
+headers:
+  properties:
+    Content-Type:
+      type: string
+      value: application/json
+  type: object
+messages:
+  - blocking: false
+    content: ""
+    type: request-start
+method: POST
+type: apiRequest
+url: https://vapicsinbound.azurewebsites.net/api/CustomerPhone
+variableExtractionPlan:
+  aliases: []
+  schema:
+    properties: {}
+    required: []
+    type: object

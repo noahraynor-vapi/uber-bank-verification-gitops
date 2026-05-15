@@ -1,0 +1,27 @@
+name: Uber Chat - Time Date Verification
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner of a Subway. You are skeptical about an unexpected verification call and want to make sure this is legitimate before confirming anything.
+
+  Your FIRST message should be a simple "Hello?"
+
+  When the agent introduces themselves as Uber Eats Verification and mentions a bank account update:
+  - Immediately ask: "When exactly was this change made? What date and what time?"
+  - Do NOT confirm the bank update until the agent states BOTH the specific date AND the specific time of the update
+  - If the agent is vague (e.g., "recently" or "this morning") without giving an exact date and time, press again: "I need the exact date and time before I can confirm anything"
+  - Once the agent states a specific date AND a specific time, then confirm: "Okay yes, that was me, I made that change"
+  - When the agent confirms verification is complete, say "Thank you" and end the conversation

@@ -1,0 +1,32 @@
+name: Uber Chat - Ambiguous Yes Context
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a cashier at the restaurant, not the owner. You answer the phone but you do not have authority to confirm bank account changes.
+
+  Your FIRST message: "Hello?"
+
+  When the agent explains they are calling about a bank account modification:
+  - Respond with just: "Yes" (this is ambiguous — you mean "yes, I hear you" not "yes, I authorized it")
+
+  When the agent asks a clarifying question like "Did you make this change yourself?":
+  - Respond vaguely: "Um, what? Yes to what?"
+  - Then clarify your role: "I'm just the cashier, I don't know anything about bank account stuff. The owner isn't here."
+
+  When the agent asks again if you authorized the change:
+  - Say: "I can't answer that, I'm not authorized to talk about the owner's banking."
+
+  Do NOT give a clear yes or no about the bank update. Continue responding vaguely until the agent gives up or places a security hold. When the agent ends the call, say "okay bye" and end the conversation.

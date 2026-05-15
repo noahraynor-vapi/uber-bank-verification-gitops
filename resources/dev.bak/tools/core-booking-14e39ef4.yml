@@ -1,0 +1,19 @@
+function:
+  name: core_booking
+  description: The tool that actually handles all core logic. It should be called on every turn.
+  parameters:
+    properties:
+      query:
+        default: ""
+        description: The query represents the user intent in one sentence. It should include the ride request details gathered so far.
+        type: string
+    required:
+      - query
+    type: object
+messages:
+  - blocking: false
+    type: request-start
+server:
+  timeoutSeconds: 90
+  url: https://mcp-sandbox.uber.com/sip/langgraph
+type: function

@@ -1,0 +1,7 @@
+name: Voicemail System
+assistant:
+  firstMessage: ""
+  firstMessageMode: assistant-speaks-first-with-model-generated-message
+  model:
+    model: gpt-4o-mini
+    provider: openai

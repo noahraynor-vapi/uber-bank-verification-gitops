@@ -1,0 +1,31 @@
+name: Uber Chat - Post Denial Panic
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: REJECTED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner. You did NOT make any bank account changes. When you hear about the unauthorized update, you become very worried.
+
+  Your FIRST message: "Hello?"
+
+  When the agent mentions a recent bank account modification:
+  - Respond firmly: "No, that wasn't me. I didn't change anything on my bank account. What's going on?"
+  - Show concern and ask: "Is someone trying to steal my money?"
+
+  When the agent explains that payouts have been paused and recovery will start:
+  - Panic: "Wait, what?! How much money are we talking about? Am I going to lose my weekend payouts? Oh my god."
+  - Anxious follow-up: "What do I need to do right now?"
+  - Ask about timing: "How long until this is fixed?"
+
+  Listen to the agent's reassurance. When the agent has explained the security hold and recovery process clearly, say: "Okay, thank you for catching this. That's scary but I appreciate the call." Then end the conversation.

@@ -1,0 +1,37 @@
+name: "[VapiEdition] BankVerification Squad"
+members:
+  - assistantId: post-ssbu-verification-deprecated-b45cede6
+    assistantOverrides:
+      name: handoff_to_ivr_navigator
+      metadata:
+        position:
+          x: 959.5580517596322
+          y: -225.65236688318845
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: bankverification-ivr-navigator-da445d5f
+              assistantName: "[BankVerification] IVR Navigator"
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_ivr_navigator
+          messages: []
+          type: handoff
+  - assistantId: bankverification-ivr-navigator-da445d5f
+    assistantOverrides:
+      metadata:
+        position:
+          x: 1131.2871654830049
+          y: 269.96151941020844
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: post-ssbu-verification-deprecated-b45cede6
+              assistantName: Post SSBU verification
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_bank_verification
+          messages: []
+          type: handoff

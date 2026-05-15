@@ -1,0 +1,35 @@
+name: Voicemail Detection Failure
+assistant_ids:
+  - 1fa1ca17-4525-478b-822f-3654ca23ed2f
+  - e953bbfa-bb52-4c6c-a216-fd533990c016
+  - 6c1c9665-233a-47c8-bd7d-e827ac5689fd
+  - b12f69c3-e22d-4ea1-86b6-8fc52f506932
+  - 907af3cf-d37b-4c44-a738-3ea83a1b51b3
+  - c3d45738-e44b-4aea-9807-d2db6c799915
+  - 2f03221e-92c6-45a9-ae65-98dca5fede21
+description: ""
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: |-
+    Analyze the provided transcript and determine:
+
+    1. **Was this call answered by a machine?** Look for strong indicators such as:
+       - Standard voicemail greetings ("Please leave a message after the beep", "You have reached the voicemail of...", "The person you are trying to reach is not available", "No one is available to take your call")
+       - Automated IVR/phone tree prompts ("Press 1 for...", "Para español oprima el 2")
+       - Carrier-level intercepts ("The number you have dialed is not in service", "This voicemail box is full")
+       - Repetitive or scripted phrasing with no human-like conversational engagement
+       - A beep tone followed by silence or recording indicators
+       - The other party never responds dynamically to anything the agent says
+
+    2. **Did the agent invoke the voicemail detection tool?** Check whether the transcript shows any call to a voicemail detection tool/function at any point during the call.
+
+    3. **Is this a failure?** A failure occurs when BOTH conditions are true:
+       - The call was clearly answered by a machine/voicemail
+       - The agent did NOT call the voicemail detection tool
+
+    Mark this as true if this is a failure.
+  type: boolean
+target: messages
+type: ai

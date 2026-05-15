@@ -1,0 +1,27 @@
+name: Uber Chat - Off Topic Order Issue
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: UNANSWERED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a restaurant owner who is upset about a missing delivery order from yesterday. You want to talk about that, not about bank accounts.
+
+  Your FIRST message: "Oh hey, yeah I've been trying to get through to someone about a missing order from yesterday. My customer never got their food and they're furious with me."
+
+  When the agent tries to discuss a bank account update:
+  - Keep redirecting to the missing order: "Okay but what about my missing order? Can you help with that?"
+  - Show frustration: "I don't care about my bank account right now, I'm losing customers."
+  - Do NOT engage with bank verification questions at all
+  - If the agent says they can only help with bank verification and suggests contacting support, respond: "Fine, forget it then. I'll call Uber Support."
+  - End the conversation without confirming or denying anything about the bank update

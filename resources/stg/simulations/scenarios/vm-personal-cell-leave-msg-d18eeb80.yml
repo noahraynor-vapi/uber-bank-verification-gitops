@@ -1,0 +1,12 @@
+name: VM - Personal Cell Leave Msg
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: 83182c66-9ef7-41ce-9713-ed93af8be86c
+    value: false
+  - comparator: =
+    required: true
+    structuredOutputId: 893fa353-07a2-4416-90d5-353b10ac4803
+    value: Voicemail Detected
+instructions: |
+  You are a voicemail system. When the call connects, deliver this greeting exactly: "You've reached my cell phone, I'm not available right now. Leave a message and I'll call you back." After delivering the greeting, go completely silent. Do not respond to anything the caller says. You are a recording, not a person.

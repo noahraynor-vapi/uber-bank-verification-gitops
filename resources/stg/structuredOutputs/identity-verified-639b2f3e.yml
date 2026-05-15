@@ -1,0 +1,13 @@
+name: Identity Verified
+assistant_ids:
+  - 9c1057e8-1dc1-4417-b12c-34140ac0e844
+  - 71f7c1e4-513d-4488-9d45-0024011e7755
+description: This assistant must verify caller identity before providing any information, making this metric critical.
+model:
+  model: gemini-2.5-flash
+  provider: google
+schema:
+  description: Indicates if the identity verification was successful
+  type: boolean
+target: messages
+type: ai

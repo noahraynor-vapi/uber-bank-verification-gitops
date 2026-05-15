@@ -1,0 +1,34 @@
+name: Outbound FE
+members:
+  - assistantId: vm-detection-907af3cf
+    assistantOverrides:
+      metadata:
+        position:
+          x: 250
+          y: 100
+      tools:append:
+        - async: false
+          destinations:
+            - assistantId: outbound-call-fronter-fe-steven-6c1c9665
+              assistantName: Outbound Call Fronter FE (Steven)
+              contextEngineeringPlan:
+                type: all
+              description: New Connection
+              type: assistant
+          function:
+            name: handoff_to_fronter
+          messages:
+            - content: Hello, this is Sarah calling from the Lifecare Help Center on a recorded line. Am I speaking with {{customer.name}}?
+              type: request-start
+          type: handoff
+      voice:
+        model: eleven_flash_v2
+        provider: 11labs
+        speed: 1
+        voiceId: X03mvPuTfprif8QBAVeJ
+  - assistantId: outbound-call-fronter-fe-steven-6c1c9665
+    assistantOverrides:
+      metadata:
+        position:
+          x: 650
+          y: 100

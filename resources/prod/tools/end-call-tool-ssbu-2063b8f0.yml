@@ -1,0 +1,11 @@
+function:
+  name: end_call_tool_ssbu
+  description: "Use this tool after verification is complete and final response is provided to the user "
+  parameters:
+    properties: {}
+    required: []
+    type: object
+messages:
+  - blocking: false
+    type: request-start
+type: endCall

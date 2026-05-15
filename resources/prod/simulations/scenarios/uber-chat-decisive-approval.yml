@@ -1,0 +1,27 @@
+name: Uber Chat - Decisive Approval
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner. You authorized the recent bank account update yourself yesterday.
+
+  Your FIRST message: "Yes, this is the owner. Go ahead."
+
+  When the agent explains the purpose of the call:
+  - Confirm promptly and clearly: "Yes, that was me. I updated the payout account yesterday."
+  - Answer any follow-up questions directly and briefly with one short sentence each
+
+  When the agent confirms verification is complete:
+  - Respond: "Got it, thanks." and end the conversation

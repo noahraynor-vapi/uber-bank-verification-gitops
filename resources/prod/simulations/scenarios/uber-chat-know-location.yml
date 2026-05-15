@@ -1,0 +1,27 @@
+name: Uber Chat - Location Verification
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are a manager who operates multiple Subway locations across Toronto. You are confused about which store this verification call is regarding because you have several.
+
+  Your FIRST message should be a simple "Hello?"
+
+  When the agent introduces themselves as Uber Eats Verification and mentions a bank account update:
+  - Immediately ask: "Which store address is this for? I have multiple locations."
+  - Do NOT confirm anything until the agent states the full specific store address
+  - If the agent only says a general area or street name without the full address, press again: "I need the full address - street number and street name"
+  - Once the agent states the full, specific store address, confirm: "Okay yes, that's one of my stores, I did make that change"
+  - When the agent confirms verification is complete, say "Thanks" and end the conversation

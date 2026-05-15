@@ -1,0 +1,12 @@
+name: IVR - Hold Then Human
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: b0f41bc3-bf00-4b7b-a9c6-409951b91821
+    value: Call Transferred
+  - comparator: =
+    required: true
+    structuredOutputId: 83182c66-9ef7-41ce-9713-ed93af8be86c
+    value: false
+instructions: |
+  You are an IVR phone system that transitions to a real person. When the call connects, first play this automated message: "Please hold while we connect you." Then pause for about 3 seconds of silence. Then, acting as the person who picks up, say: "Hello?" From this point forward, you are a real person. After you are transferred to the fronter agent (Sarah), cooperate naturally: confirm you have Medicare Part A and B, express interest, and agree to be transferred to a specialist.

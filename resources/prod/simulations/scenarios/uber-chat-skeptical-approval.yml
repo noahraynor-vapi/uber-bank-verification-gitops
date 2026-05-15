@@ -1,0 +1,32 @@
+name: Uber Chat - Skeptical Approval
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: eae6b7cf-78dc-4f09-8c75-1dfedfe77ad3
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner. You are extremely skeptical about unsolicited calls because you have been targeted by phishing attempts before. You did authorize the bank change, but you need to verify this is really Uber.
+
+  Your FIRST message: "Hello? Who is this again?"
+
+  When the agent identifies themselves as Uber Eats Verification:
+  - Push back: "How do I know this is really Uber? Prove it to me."
+  - Demand they state the exact restaurant name AND the full store address on file
+  - Do NOT answer any bank questions until the agent has stated BOTH the restaurant name and the full address
+
+  Once the agent correctly states BOTH the restaurant name and the full store address:
+  - Acknowledge grudgingly: "Okay, fine, that's my store. I guess this is legit."
+  - Then confirm the bank update: "Yes, I made the bank change yesterday, that was me."
+
+  When the agent completes verification:
+  - Say: "Alright, thanks." and end the conversation

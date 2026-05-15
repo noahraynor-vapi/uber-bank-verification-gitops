@@ -1,0 +1,17 @@
+name: bank_verification_outcome_noah
+assistant_ids:
+  - fronter-noah
+  - japaneese-post-ssbu-verification-noah
+description: Categorizes the final outcome of bank update verification for the Noah squad
+schema:
+  description: |-
+    Final outcome of bank update verification. Classify based on the merchant's INTENT, not their exact words.
+    APPROVED: The merchant clearly confirms they personally made or authorized the bank account change.
+    REJECTED: The merchant explicitly states they did NOT make the change and did NOT authorize it. The merchant must demonstrate clear understanding of what is being asked and consciously deny it.
+    UNANSWERED: The verification could not be completed. This includes: language barriers where the merchant cannot communicate effectively, the merchant is not the owner or not authorized to confirm, the merchant is confused or gives unclear answers, the call ended before verification, or the merchant's responses do not demonstrate clear understanding of the question being asked.
+  enum:
+    - APPROVED
+    - REJECTED
+    - UNANSWERED
+  type: string
+type: ai

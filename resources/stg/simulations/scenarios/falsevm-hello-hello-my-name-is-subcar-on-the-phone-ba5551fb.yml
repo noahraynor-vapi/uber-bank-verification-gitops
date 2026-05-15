@@ -1,0 +1,14 @@
+name: FalseVM - Hello? Hello? My name is subcar on the phone.
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: 893fa353-07a2-4416-90d5-353b10ac4803
+    value: Human Detected
+  - comparator: =
+    required: true
+    structuredOutputId: 83182c66-9ef7-41ce-9713-ed93af8be86c
+    value: false
+instructions: |
+  You are a real person answering a phone call. When the call connects, answer with exactly: "Hello? Hello? My name is subcar on the phone."
+
+  After you are transferred to the fronter agent (Sarah), cooperate naturally: confirm you have Medicare Part A and B, express interest, and agree to be transferred to a specialist.

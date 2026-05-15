@@ -1,0 +1,16 @@
+name: VM - Generic Phone Number
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: 83182c66-9ef7-41ce-9713-ed93af8be86c
+    value: false
+  - comparator: =
+    required: true
+    structuredOutputId: 893fa353-07a2-4416-90d5-353b10ac4803
+    value: Voicemail Detected
+instructions: |
+  You are a voicemail system. When the call connects, deliver this greeting exactly:
+
+  "Please leave your message for 5-5-5, 1-2-3, 4-5-6-7. When you are finished recording, you may hang up or press the pound key."
+
+  After delivering the greeting, go completely silent. Do not respond to anything the caller says. You are a recording, not a person.

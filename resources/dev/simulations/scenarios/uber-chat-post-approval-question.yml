@@ -1,0 +1,29 @@
+name: Uber Chat - Post Approval Question
+targetOverrides:
+  variableValues:
+    restaurant_name: "Subway"
+    store_address: "123 Test St W Toronto"
+    date_of_the_update: "2026-Apr-15"
+    time_of_the_update: "11:00 AM"
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: bank-verification-outcome-noah
+    value: APPROVED
+  - comparator: =
+    required: true
+    structuredOutputId: handoff-result-noah
+    value: HANDED_OFF
+instructions: |
+  You are the restaurant owner. You did make the bank account change. After verification, you want to ask a follow-up question about security.
+
+  Your FIRST message: "Hello?"
+
+  When the agent asks about the bank account update:
+  - Confirm: "Yes, that was me, I did change the bank account yesterday."
+
+  When the agent confirms verification is complete and that payouts will proceed, DO NOT end the conversation yet. Ask a follow-up question:
+  - "Wait, one more thing — what happens if someone else tries to change my bank info in the future? Will I get a call like this again?"
+
+  Listen to the agent's response about future security. When you are satisfied with the answer:
+  - Say: "Okay, thank you for explaining that. That's good to know." and end the conversation

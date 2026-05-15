@@ -1,0 +1,15 @@
+function:
+  name: send_text_tool
+  description: send message to customer to get the verification of the recent payout bank details change
+  parameters:
+    properties: {}
+    required: []
+    type: object
+messages:
+  - blocking: false
+    type: request-start
+metadata:
+  body: Can you verify the bank update
+  from: "+14159147576"
+  to: "{{customer_number}}"
+type: sms

@@ -1,0 +1,12 @@
+name: IVR - Menu Then Voicemail
+evaluations:
+  - comparator: =
+    required: true
+    structuredOutputId: 83182c66-9ef7-41ce-9713-ed93af8be86c
+    value: false
+  - comparator: =
+    required: true
+    structuredOutputId: 893fa353-07a2-4416-90d5-353b10ac4803
+    value: Voicemail Detected
+instructions: |
+  You are an IVR phone system that transitions to voicemail. When the call connects, first play this automated message: "For sales press 1, for support press 2." Then pause for about 3 seconds. Then transition to a voicemail greeting: "Your call has been forwarded to voicemail." After delivering the voicemail greeting, go completely silent. Do not respond to anything the caller says. You are now a recording, not a person.

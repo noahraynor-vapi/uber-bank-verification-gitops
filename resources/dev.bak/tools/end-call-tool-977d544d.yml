@@ -1,0 +1,11 @@
+function:
+  name: end_call_tool
+  description: Use this tool to end the call
+  parameters:
+    properties: {}
+    required: []
+    type: object
+messages:
+  - blocking: false
+    type: request-start
+type: endCall
