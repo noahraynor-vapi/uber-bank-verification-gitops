@@ -20,7 +20,7 @@ model:
   model: gpt-4.1
   promptCacheRetention: 24h
   provider: openai
-  temperature: 0.2
+  temperature: 0
   toolIds:
     - end-on-voicemail-7431ee4f
     - dtmf-keypad-tool-5825dba7
@@ -75,7 +75,7 @@ voice:
   provider: 11labs
   voiceId: 0jNCeOHaNZsiWL2WCbBV
   model: eleven_turbo_v2
-  speed: 1.2
+  speed: 1.1
   style: 0.8
   stability: 0.7
   similarityBoost: 0.75

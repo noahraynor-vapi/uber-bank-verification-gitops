@@ -19,7 +19,7 @@ members:
             name: handoff_to_fronter
           messages:
             - blocking: true
-              content: Hi there, this is Uber Eats Verification. This call is recorded for quality and security purposes.
+              content: Hello, this is Uber Eats Verification. I'm an automated system calling about a recent bank account update in the Uber Eats portal.
               type: request-start
           type: handoff
   - assistantId: fronter-noah
