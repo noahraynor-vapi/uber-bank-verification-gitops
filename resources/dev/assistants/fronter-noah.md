@@ -89,7 +89,7 @@ voice:
   provider: 11labs
   voiceId: aDjvvX7jMB9myKCnThP3
   model: eleven_turbo_v2
-  speed: 1.2
+  speed: 1.15
   style: 0.8
   stability: 0.2
   similarityBoost: 0.75
@@ -104,6 +104,51 @@ voice:
       - ";"
       - ","
       - ":"
+    formatPlan:
+      numberToDigitsCutoff: 99999
+      formattersEnabled:
+        - markdown
+        - newline
+        - colon
+        - acronym
+        - stripAsterisk
+      replacements:
+        - type: regex
+          regex: '\bRd\b'
+          value: Road
+          options:
+            - type: ignore-case
+              enabled: true
+        - type: regex
+          regex: '\bSt\b'
+          value: Street
+          options:
+            - type: ignore-case
+              enabled: true
+        - type: regex
+          regex: '\bAve\b'
+          value: Avenue
+          options:
+            - type: ignore-case
+              enabled: true
+        - type: regex
+          regex: '\bBlvd\b'
+          value: Boulevard
+          options:
+            - type: ignore-case
+              enabled: true
+        - type: regex
+          regex: '\bLn\b'
+          value: Lane
+          options:
+            - type: ignore-case
+              enabled: true
+        - type: regex
+          regex: '\bDr\b'
+          value: Drive
+          options:
+            - type: ignore-case
+              enabled: true
 voicemailMessage: ""
 ---
 
