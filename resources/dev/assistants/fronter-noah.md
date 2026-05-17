@@ -44,47 +44,35 @@ stopSpeakingPlan:
   backoffSeconds: 0.8
   acknowledgementPhrases: []
 transcriber:
-  contextGeneral:
-    - key: domain
-      value: Banking
-    - key: topic
-      value: Bank account update verification
-    - key: organization
-      value: Uber Eats
-    - key: task
-      value: Verify merchant authorized a recent change to their payout bank account
-    - key: intent
-      value: Fraud prevention
-  customVocabulary:
-    - Uber
-    - Uber Eats
-    - Uber Eats Manager
-    - Uber Eats Verification
-    - merchant
-    - payout
-    - payout method
-    - deposit details
-    - funding info
-    - banking
-    - bank account
-    - routing number
-    - account number
-    - direct deposit
-    - ACH
-    - EIN
-    - authorize
-    - authorization
-    - modification
-    - unauthorized
-    - compromised
-  fallbackPlan:
-    transcribers:
-      - provider: deepgram
-        model: flux-general-en
-        language: en
+  provider: deepgram
+  model: flux-general-en
   language: en
-  model: stt-rt-v4
-  provider: soniox
+  eotThreshold: 0.7
+  eotTimeoutMs: 5000
+  keyterm:
+    - Vapi
+    - ElevenLabs
+    - Deepgram
+    - Cartesia
+    - Twilio
+    - Vonage
+    - Telnyx
+    - OpenAI
+    - Anthropic
+    - Claude
+    - Gemini
+    - GPT
+    - Whisper
+    - PlayHT
+    - AssemblyAI
+    - Groq
+    - Cerebras
+    - API
+    - SDK
+    - CRM
+  fallbackPlan:
+    autoFallback:
+      enabled: true
 voice:
   provider: 11labs
   voiceId: aDjvvX7jMB9myKCnThP3
@@ -105,12 +93,13 @@ voice:
       - ","
       - ":"
     formatPlan:
-      numberToDigitsCutoff: 99999
+      numberToDigitsCutoff: 0
       formattersEnabled:
         - markdown
         - newline
         - colon
         - acronym
+        - number
         - stripAsterisk
       replacements:
         - type: regex
