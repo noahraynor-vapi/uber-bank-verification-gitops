@@ -73,11 +73,11 @@ transcriber:
   provider: soniox
 voice:
   provider: 11labs
-  voiceId: 0jNCeOHaNZsiWL2WCbBV
+  voiceId: aDjvvX7jMB9myKCnThP3
   model: eleven_turbo_v2
-  speed: 1.1
+  speed: 1.2
   style: 0.8
-  stability: 0.7
+  stability: 0.2
   similarityBoost: 0.75
   useSpeakerBoost: false
   chunkPlan:
