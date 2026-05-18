@@ -1,11 +1,21 @@
 function:
   name: end_call_tool
+  description: |
+    Ends the call. Call this when the conversation is complete (after delivering the AUTHORIZED, DENIED, or UNABLE TO VERIFY outcome and receiving acknowledgment; or after a language-barrier closer, out-of-scope deflection, or wrong-role refusal).
+    Always fill in `farewell` with a polite, professional goodbye.
   parameters:
-    properties: {}
-    required: []
+    properties:
+      farewell:
+        type: string
+        description: |
+          A short, natural farewell message to say before hanging up. Be polite and professional. Keep it to one short sentence.
+          Example:
+          - "Thank you for speaking with us today. Have a great rest of your day."
+    required:
+      - farewell
     type: object
 messages:
-  - blocking: false
-    content: ""
+  - blocking: true
+    content: "{{ farewell }}"
     type: request-start
 type: endCall
