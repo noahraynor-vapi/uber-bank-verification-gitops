@@ -15,13 +15,41 @@ compliancePlan:
   hipaaEnabled: false
   pciEnabled: false
   zdrEnabled: false
-endCallMessage: Goodbye.
+endCallMessage: ""
 firstMessage: ""
 firstMessageInterruptionsEnabled: true
 firstMessageMode: assistant-waits-for-user
+hooks:
+  - on: customer.speech.timeout
+    name: ask-1
+    options:
+      timeoutSeconds: 10
+      triggerMaxCount: 1
+    do:
+      - type: say
+        exact: Just checking. Are you still there?
+  - on: customer.speech.timeout
+    name: ask-2
+    options:
+      timeoutSeconds: 22
+      triggerMaxCount: 1
+    do:
+      - type: say
+        exact: Just checking one more time. Are you still there?
+  - on: customer.speech.timeout
+    name: end-call
+    options:
+      timeoutSeconds: 35
+      triggerMaxCount: 1
+    do:
+      - type: say
+        exact: It looks like you stepped away.
+      - type: tool
+        tool:
+          type: endCall
+          messages: []
 messagePlan:
-  idleMessages:
-    - Are you still there?
+  idleMessages: []
 model:
   model: gpt-4.1
   promptCacheRetention: 24h
@@ -35,7 +63,7 @@ server:
   timeoutSeconds: 20
 serverMessages:
   - end-of-call-report
-silenceTimeoutSeconds: 18
+silenceTimeoutSeconds: 90
 startSpeakingPlan:
   waitSeconds: 0.4
 stopSpeakingPlan:

@@ -9,7 +9,9 @@ function:
         description: |
           A short, natural farewell message to say before hanging up. Be polite and professional. Keep it to one or two short sentences.
           Example:
-          - If the call went smoothly: "Thank you for speaking with us today. Have a great rest of your day."
+          - "Thank you for speaking with us today. Have a great rest of your day."
+          - If the last message was "Just checking.  Are you still there", then use "It seems like we got disconnected.  Have a great day."
+
     required:
       - farewell
     type: object
