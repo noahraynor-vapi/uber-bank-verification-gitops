@@ -29,6 +29,10 @@ server:
 serverMessages:
   - end-of-call-report
 silenceTimeoutSeconds: 15
+stopSpeakingPlan:
+  numWords: 2
+  voiceSeconds: 0.3
+  backoffSeconds: 1.0
 transcriber:
   provider: deepgram
   model: flux-general-en

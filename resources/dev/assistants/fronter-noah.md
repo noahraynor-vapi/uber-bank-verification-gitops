@@ -39,10 +39,9 @@ silenceTimeoutSeconds: 18
 startSpeakingPlan:
   waitSeconds: 0.4
 stopSpeakingPlan:
-  numWords: 0
-  voiceSeconds: 0.2
-  backoffSeconds: 0.8
-  acknowledgementPhrases: []
+  numWords: 2
+  voiceSeconds: 0.3
+  backoffSeconds: 1.0
 transcriber:
   provider: deepgram
   model: flux-general-en
