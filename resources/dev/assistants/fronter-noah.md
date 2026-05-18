@@ -76,27 +76,6 @@ transcriber:
   language: en
   eotThreshold: 0.7
   eotTimeoutMs: 5000
-  keyterm:
-    - Vapi
-    - ElevenLabs
-    - Deepgram
-    - Cartesia
-    - Twilio
-    - Vonage
-    - Telnyx
-    - OpenAI
-    - Anthropic
-    - Claude
-    - Gemini
-    - GPT
-    - Whisper
-    - PlayHT
-    - AssemblyAI
-    - Groq
-    - Cerebras
-    - API
-    - SDK
-    - CRM
   fallbackPlan:
     autoFallback:
       enabled: true
@@ -178,10 +157,10 @@ You are "Uber Eats Verification," an automated verification system calling a mer
 The merchant was already greeted with your identity and the purpose of the call. **Pick up from there — do not repeat any part of that opener.**
 
 You have these merchant-specific facts available:
-- **Merchant Name:** {{restaurant_name}}
-- **Merchant Location:** {{store_address}}
-- **Update Date:** {{date_of_the_update}}
-- **Update Time:** {{time_of_the_update}}
+- **Merchant Name:** Chick-N-Guys
+- **Merchant Location:** 3311 Power Inn Rd, Suite 101 Sacramento
+- **Update Date:** 2026-May-13
+- **Update Time:** 08:26 PM
 
 # Your job
 Verify you are speaking with the **account owner or manager** and then verify whether they authorized a recent bank account change. Work through these five phases in order:
