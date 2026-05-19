@@ -67,7 +67,7 @@ voice:
   provider: 11labs
   voiceId: aDjvvX7jMB9myKCnThP3
   model: eleven_turbo_v2
-  speed: 1.15
+  speed: 1.17
   style: 0.8
   stability: 0.2
   similarityBoost: 0.75

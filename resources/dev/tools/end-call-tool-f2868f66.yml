@@ -1,20 +1,18 @@
 function:
   name: end_call_tool
   description: |
-    Ends the call. Call this when the conversation is complete (after delivering the AUTHORIZED, DENIED, or UNABLE TO VERIFY outcome and receiving acknowledgment; or after a language-barrier closer, out-of-scope deflection, or wrong-role refusal).
+    Ends the call. Speaks the `farewell` parameter to the merchant, then hangs up. The farewell MUST start with the verbatim Step 4 outcome line from the system prompt (AUTHORIZED, DENIED, UNABLE TO VERIFY, or LANGUAGE-BARRIER) followed by a brief one-sentence closer such as "Have a great rest of your day. Goodbye."
   parameters:
+    type: object
     properties:
       farewell:
         type: string
         description: |
-          A short, natural farewell message to say before hanging up. Be polite and professional. Keep it to one or two short sentences.
-          Example:
-          - "Thank you for speaking with us today. Have a great rest of your day."
-          - If the last message was "Just checking.  Are you still there", then use "It seems like we got disconnected.  Have a great day."
-
+          The full text to speak before hanging up. MUST begin with the verbatim Step 4 outcome line that matches the Step 3 classification, copied exactly from the system prompt — followed by a brief one-sentence closer.
+          Example for AUTHORIZED:
+          "Thanks for confirming. We've removed the payout delay. Your account is secure and the update will proceed. Have a great rest of your day. Goodbye."
     required:
       - farewell
-    type: object
 messages:
   - blocking: true
     content: "{{ farewell }}"

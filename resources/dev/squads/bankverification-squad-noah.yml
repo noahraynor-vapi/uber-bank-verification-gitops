@@ -19,7 +19,7 @@ members:
             name: handoff_to_fronter
           messages:
             - blocking: true
-              content: Hello, this is Uber Eats Verification. I'm an automated system calling about a recent bank account update in the Uber Eats portal.
+              content: Hello, this is Uber Eats Verification. We're calling today about the bank update for {{ restaurant_name }}.  Do you happen to be the owner or manager?
               type: request-start
           type: handoff
   - assistantId: fronter-noah
