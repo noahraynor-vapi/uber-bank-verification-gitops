@@ -40,26 +40,19 @@ transcriber:
   eotThreshold: 0.7
   eotTimeoutMs: 5000
   keyterm:
-    - Vapi
-    - ElevenLabs
-    - Deepgram
-    - Cartesia
-    - Twilio
-    - Vonage
-    - Telnyx
-    - OpenAI
-    - Anthropic
-    - Claude
-    - Gemini
-    - GPT
-    - Whisper
-    - PlayHT
-    - AssemblyAI
-    - Groq
-    - Cerebras
-    - API
-    - SDK
-    - CRM
+    - Uber
+    - Uber Eats
+    - Uber Eats Manager
+    - Uber Eats Verification
+    - merchant
+    - payout
+    - payout method
+    - bank account
+    - routing number
+    - account number
+    - direct deposit
+    - ACH
+    - EIN
   fallbackPlan:
     autoFallback:
       enabled: true

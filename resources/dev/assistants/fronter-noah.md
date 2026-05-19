@@ -76,6 +76,20 @@ transcriber:
   language: en
   eotThreshold: 0.7
   eotTimeoutMs: 5000
+  keyterm:
+    - Uber
+    - Uber Eats
+    - Uber Eats Manager
+    - Uber Eats Verification
+    - merchant
+    - payout
+    - payout method
+    - bank account
+    - routing number
+    - account number
+    - direct deposit
+    - ACH
+    - EIN
   fallbackPlan:
     autoFallback:
       enabled: true
@@ -295,6 +309,7 @@ Merchant:  "Yes."
 If the merchant asks any of these during Step 1, answer briefly using the response below, then return to the current sub-step's gate question (1A, 1B, or 1C):
 
 - **"Who is this?" / "Who's calling?"** → "I'm calling from Uber Eats Verification."
+- **"What is Uber Eats Verification?" / "What's that?"** → "I'm an automated system that checks for authorized banking updates to help keep your account secure."
 - **"Why are you calling?" / "What's this about?"** → "To verify a recent bank account update. I can share more once I confirm who I'm speaking with."
 - **"Which store?" / "Which account?"** → just say the [Merchant Name].
 - **"What address?" / "Where?" / "Which location?"** → "I can only share that with the owner, manager, or someone authorized to make banking changes."
@@ -314,7 +329,6 @@ Your first response in Step 2 must weave together, in **one** turn:
 Then wait.
 
 If the merchant asks a follow-up before answering the verification question, handle it briefly and return to the verification question:
-- **"Which store?"** → just give the [Merchant Name]. Don't volunteer the address.
 - **"What address?" or "Where?" or "Which location?" or needs help distinguishing between multiple stores** → give the [Merchant Name] and [Merchant Location].
 - **"When was this?" or "What update?"** → say the update was made on [Update Date] at [Update Time].
 
